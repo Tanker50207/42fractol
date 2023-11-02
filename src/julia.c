@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:02:10 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/02 16:26:08 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:16:17 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_julia_seed(t_fractol fractol)
 	size_t	i;
 
 	ft_printf("Julia seed: ");
-	if (fractol.cx < 0)
+	if (fractol.cx < 0 && fractol.cx > -1)
 		ft_putchar('-');
 	ft_printf("%d.", (int)(fractol.cx));
 	tmp = ft_itoa((int)fabsl(((fractol.cx - (int)fractol.cx) * 1000000)));
@@ -39,7 +39,7 @@ void	print_julia_seed(t_fractol fractol)
 	ft_printf("%s", tmp);
 	free(tmp);
 	ft_putchar(' ');
-	if (fractol.cy < 0)
+	if (fractol.cy < 0 && fractol.cy > -1)
 		ft_putchar('-');
 	ft_printf("%d.", (int)(fractol.cy));
 	tmp = ft_itoa((int)fabsl(((fractol.cy - (int)fractol.cy) * 1000000)));
@@ -105,7 +105,8 @@ void	julia(t_fractol fractol)
 			if (fractol.max_iter > 0)
 				mlx_put_pixel(fractol.img, x, y,
 					create_trgb(255, 0,
-						255 - ((255 * fractol.max_iter) / fractol.iter_default),
+						255 - ((255 * fractol.max_iter)
+							/ (fractol.iter_default * 1.5)),
 						(255 * fractol.max_iter) / (fractol.iter_default * 2)));
 			else
 				mlx_put_pixel(fractol.img, x, y,

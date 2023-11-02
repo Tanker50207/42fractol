@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:58:02 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/02 15:26:13 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:12:30 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ static void	ft_scroll_hook(double xdelta, double ydelta, void *param)
 	fractol = (t_fractol *)param;
 	mlx_get_mouse_pos(fractol->mlx, &mouse_x, &mouse_y);
 	if (ydelta < 0)
+	{
 		fractol->scale *= 1.5;
+		fractol->iter_default -= 15;
+	}
 	else
+	{
 		fractol->scale /= 1.5;
+		fractol->iter_default += 15;
+	}
 	fractol->x_mod += (fractol->scale
 			* (((t_ld)(2 * mouse_x) - (t_ld)fractol->mlx->width)
-				/ (t_ld)fractol->mlx->height)) / 4;
+				/ (t_ld)fractol->mlx->height)) / 2;
 	fractol->y_mod += (fractol->scale * (((t_ld)(2 * mouse_y)
-					/ (t_ld)fractol->mlx->height) - 1)) / 4;
+					/ (t_ld)fractol->mlx->height) - 1)) / 2;
 	fractol->current(*fractol);
 }
 
@@ -77,7 +83,7 @@ t_fractol	innit_fractol(t_fractol fractol, mlx_t *mlx,
 	fractol.scale = 2;
 	fractol.x_mod = 0;
 	fractol.y_mod = 0;
-	fractol.iter_default = 50;
+	fractol.iter_default = 100;
 	if (ft_strcmp(fractal, "mandelbrot") == 0)
 		fractol.current = mandelbrot;
 	else if (ft_strcmp(fractal, "julia") == 0)
