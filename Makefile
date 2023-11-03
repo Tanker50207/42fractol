@@ -34,6 +34,8 @@ fclean: libclean clean
 
 libclean:
 	@$(MAKE) -C ./lib/libft fclean
+	@rm -rf $(LIBMLX)
+	@echo "\033[1;31mMLX42 cleaned\033[0m"
 
 re: fclean space all
 
