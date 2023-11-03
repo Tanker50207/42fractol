@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:07:36 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/02 15:41:58 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/03 12:14:07 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,12 @@ void	ft_on_click(mouse_key_t button, action_t action, modifier_key_t mod,
 	fractol->current = julia;
 	*fractol = set_julia_c(*fractol, mouse_x, mouse_y);
 	julia(*fractol);
+}
+
+void	reset_view(t_fractol *fractol)
+{
+	fractol->x_mod = 0;
+	fractol->y_mod = 0;
+	fractol->scale = 2;
+	fractol->iter_default = 500;
 }

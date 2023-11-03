@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:58:02 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/02 17:12:30 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/03 12:33:39 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void	ft_key_hook(mlx_key_data_t keycode, void *param)
 		fractol->iter_default += 10;
 	else if (keycode.key == MLX_KEY_M)
 		fractol->iter_default -= 10;
-	else if (keycode.key == MLX_KEY_T)
-		fractol->iter_default = 500;
+	else if (keycode.key == MLX_KEY_R)
+		reset_view(fractol);
 	else
 		return ;
 	fractol->current(*fractol);
@@ -83,7 +83,7 @@ t_fractol	innit_fractol(t_fractol fractol, mlx_t *mlx,
 	fractol.scale = 2;
 	fractol.x_mod = 0;
 	fractol.y_mod = 0;
-	fractol.iter_default = 100;
+	fractol.iter_default = 200;
 	if (ft_strcmp(fractal, "mandelbrot") == 0)
 		fractol.current = mandelbrot;
 	else if (ft_strcmp(fractal, "julia") == 0)

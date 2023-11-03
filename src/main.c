@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:17:25 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/02 15:28:05 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/03 12:15:06 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_message(void)
 	ft_printf(" the julia set for complex number 0 + 0i\n");
 	ft_printf("\nPress P to increase the number of iterations\n");
 	ft_printf("Press M to decrease the number of iterations\n");
-	ft_printf("Press T to set the number of iterations to 500\n");
+	ft_printf("Press R to reset the view\n");
 	ft_printf("Press the arrow keys to move around\n");
 	ft_printf("Scroll up to zoom in\n");
 	ft_printf("Scroll down to zoom out\n");

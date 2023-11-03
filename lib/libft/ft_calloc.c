@@ -15,12 +15,10 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*ptr;
-	size_t			i;
 
 	ptr = malloc(count * size);
 	if (!ptr)
 		return (0);
-	i = 0;
 	ft_bzero(ptr, count * size);
 	return ((void *)ptr);
 }

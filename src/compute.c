@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	itterate(t_fractol *fractol)
+void	iterate(t_fractol *fractol)
 {
 	t_ld	tmp;
 
