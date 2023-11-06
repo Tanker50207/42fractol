@@ -31,6 +31,7 @@ typedef struct s_fractol
 	t_ld		x_mod;
 	t_ld		y_mod;
 	int			iter_default;
+	int			re_do;
 	void		(*current)(struct s_fractol);
 }				t_fractol;
 
@@ -49,5 +50,7 @@ t_fractol	innit_fractol(t_fractol fractol, mlx_t *mlx,
 				mlx_image_t *img, char *fractal);
 void		reset_view(t_fractol *fractol);
 void		ft_put_pixel(t_fractol fractol, int x, int y);
+void		ft_loop_hook(void *param);
+void		newton(t_fractol fractol);
 
 #endif

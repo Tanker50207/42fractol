@@ -81,8 +81,8 @@ t_fractol	set_julia_c_preset(t_fractol fractol, char preset)
 	}
 	else if (preset == '4')
 	{
-		fractol.cx = 0.34;
-		fractol.cy = -0.05;
+		fractol.cx = -0.744444;
+		fractol.cy = -0.105555;
 	}
 	print_julia_seed(fractol);
 	return (fractol);

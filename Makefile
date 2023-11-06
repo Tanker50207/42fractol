@@ -2,7 +2,7 @@ LIBMLX	:= ./lib/MLX42
 CFLAGS= -Wextra -Wall -Werror -g
 LIBS	:= -framework OpenGL -framework IOKit $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -lft -L./lib/libft
 NAME = fractol
-OBJECTS = src/main.o src/graphics.o src/compute.o src/mandelbrot.o src/julia.o src/onclick.o src/mlx.o
+OBJECTS = src/main.o src/graphics.o src/compute.o src/mandelbrot.o src/julia.o src/onclick.o src/mlx.o src/newton.o
 DEPS = -I./include -I $(LIBMLX)/include -I./lib/libft
 
 all: $(LIBMLX) space
@@ -42,7 +42,7 @@ re: fclean space all
 space:
 	@echo
 
-%.o: %.c
+%.o: %.c include/fractol.h
 	cc -c -o $@ $< $(CFLAGS) $(DEPS)
 
 .PHONY: clean fclean re all libclean space

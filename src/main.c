@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:17:25 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/03 12:15:06 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/06 13:50:28 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	error_message(void)
 {
 	ft_printf("\nUsage: ./fractol mandelbrot\n");
+	ft_printf("Usage: ./fractol newton\n");
 	ft_printf("Usage: ./fractol julia [preset]\n");
 	ft_printf("The julia presets are 1, 2, 3 and 4\n");
 	ft_printf("Any other argument or no argument will result in");
@@ -39,6 +40,8 @@ int	main(int argc, char **argv)
 	}
 	if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)
 		start("mandelbrot", 0);
+	if (ft_strcmp(argv[1], "newton") == 0 && argc == 2)
+		start("newton", 0);
 	else if (ft_strcmp(argv[1], "julia") == 0 && argc >= 2)
 	{
 		if (argc == 3)

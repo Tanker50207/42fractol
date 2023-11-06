@@ -30,6 +30,18 @@ void	ft_on_click(mouse_key_t button, action_t action, modifier_key_t mod,
 	julia(*fractol);
 }
 
+void ft_loop_hook(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = param;
+	if (fractol->re_do)
+	{
+		fractol->current(*fractol);
+		fractol->re_do = 0;
+	}
+}
+
 void	reset_view(t_fractol *fractol)
 {
 	fractol->x_mod = 0;
