@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:29:08 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/03 12:30:32 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/09 14:07:35 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@
 typedef long double	t_ld;
 typedef struct s_fractol
 {
-	t_ld		zx;
-	t_ld		zy;
-	int			max_iter;
-	t_ld		cx;
-	t_ld		cy;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_ld		scale;
-	t_ld		x_mod;
-	t_ld		y_mod;
-	int			iter_default;
-	int			re_do;
-	void		(*current)(struct s_fractol);
-}				t_fractol;
+	t_ld			zx;
+	t_ld			zy;
+	int				max_iter;
+	t_ld			cx;
+	t_ld			cy;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_ld			scale;
+	t_ld			x_mod;
+	t_ld			y_mod;
+	unsigned int	iter_default;
+	int				re_do;
+	void			(*current)(struct s_fractol);
+}	t_fractol;
+
+# ifndef ITER_DEFAULT
+#  define ITER_DEFAULT 100
+# endif
 
 int			create_trgb(int t, int r, int g, int b);
 void		mandelbrot(t_fractol fractol);

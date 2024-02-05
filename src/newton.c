@@ -23,7 +23,7 @@ static void	iterate_n(t_fractol *fractol)
 		- (fractol->zy * fractol->zy * fractol->zy) + fractol->cy;
 }
 
-static t_fractol	reset_fractol_n(t_fractol fractol, int x, int y)
+static t_fractol	reset_fractol(t_fractol fractol, int x, int y)
 {
 	fractol.max_iter = fractol.iter_default;
 	fractol.cx = (fractol.scale
@@ -47,7 +47,7 @@ void	newton(t_fractol fractol)
 		y = 0;
 		while (y < fractol.mlx->height)
 		{
-			fractol = reset_fractol_n(fractol, x, y);
+			fractol = reset_fractol(fractol, x, y);
 			while (get_absolute(&fractol) < 4 && fractol.max_iter-- > 0)
 				iterate_n(&fractol);
 			if (fractol.max_iter > 0)

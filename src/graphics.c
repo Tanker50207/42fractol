@@ -23,18 +23,14 @@ void	ft_put_pixel(t_fractol fractol, int x, int y)
 	int	green;
 	int	blue;
 
+	green = 0;
+	red = 0;
 	if (((fractol.iter_default - fractol.max_iter) / 100) % 2)
-	{
 		red = 255 * (fractol.iter_default - fractol.max_iter)
 			/ (fractol.iter_default);
-		green = 0;
-	}
 	else
-	{
-		red = 0;
 		green = 255 * (fractol.iter_default - fractol.max_iter)
 			/ (fractol.iter_default);
-	}
 	blue = 122 * fractol.max_iter / fractol.iter_default;
 	mlx_put_pixel(fractol.img, x, y, create_trgb(255, red, green, blue));
 }

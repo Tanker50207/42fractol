@@ -6,7 +6,7 @@
 /*   By: gcrepin <gcrepin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:58:02 by gcrepin           #+#    #+#             */
-/*   Updated: 2023/11/06 11:59:40 by gcrepin          ###   ########.fr       */
+/*   Updated: 2023/11/06 14:18:20 by gcrepin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	ft_key_hook(mlx_key_data_t keycode, void *param)
 	else if (keycode.key == MLX_KEY_DOWN)
 		fractol->y_mod += fractol->scale / 4;
 	else if (keycode.key == MLX_KEY_P)
-		fractol->iter_default += 10;
-	else if (keycode.key == MLX_KEY_M)
-		fractol->iter_default -= 10;
+		fractol->iter_default += 50;
+	else if (keycode.key == MLX_KEY_M && fractol->iter_default > 50)
+		fractol->iter_default -= 50;
 	else if (keycode.key == MLX_KEY_R)
 		reset_view(fractol);
 	else
@@ -55,27 +55,26 @@ static void	ft_scroll_hook(double xdelta, double ydelta, void *param)
 	int			mouse_y;
 
 	(void) xdelta;
-	fractol = (t_fractol *)param;
+	fractol = (t_fractol *) param;
 	mlx_get_mouse_pos(fractol->mlx, &mouse_x, &mouse_y);
 	if (ydelta < 0)
 	{
+		if (fractol->scale > 100)
+			return ;
 		fractol->scale *= 1.25;
 		fractol->iter_default -= 7;
 	}
-	else
+	else if (ydelta > 0)
 	{
 		fractol->scale /= 1.25;
 		fractol->iter_default += 7;
 	}
-	if (!fractol->re_do)
-	{
-		fractol->x_mod += (fractol->scale
-				* (((t_ld)(2 * mouse_x) - (t_ld)fractol->mlx->width)
-					/ (t_ld)fractol->mlx->height) / 4);
-		fractol->y_mod += (fractol->scale * (((t_ld)(2 * mouse_y)
-						/ (t_ld)fractol->mlx->height) - 1) / 4);
-		fractol->re_do = 1;
-	}
+	fractol->x_mod += (fractol->scale
+			* (((t_ld)(2 * mouse_x) - (t_ld)fractol->mlx->width)
+				/ (t_ld)fractol->mlx->height) / 4);
+	fractol->y_mod += (fractol->scale * (((t_ld)(2 * mouse_y)
+					/ (t_ld)fractol->mlx->height) - 1) / 4);
+	fractol->re_do = 1;
 }
 
 t_fractol	innit_fractol(t_fractol fractol, mlx_t *mlx,
@@ -83,11 +82,7 @@ t_fractol	innit_fractol(t_fractol fractol, mlx_t *mlx,
 {
 	fractol.mlx = mlx;
 	fractol.img = img;
-	fractol.scale = 1.5;
-	fractol.re_do = 0;
-	fractol.x_mod = 0;
-	fractol.y_mod = 0;
-	fractol.iter_default = 200;
+	reset_view(&fractol);
 	if (ft_strcmp(fractal, "mandelbrot") == 0)
 		fractol.current = mandelbrot;
 	else if (ft_strcmp(fractal, "julia") == 0)

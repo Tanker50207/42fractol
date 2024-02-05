@@ -1,8 +1,8 @@
 LIBMLX	:= ./lib/MLX42
-CFLAGS= -Wextra -Wall -Werror -g
+CFLAGS= -Wextra -Wall -Werror
 LIBS	:= -framework OpenGL -framework IOKit $(LIBMLX)/build/libmlx42.a -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm -lft -L./lib/libft
 NAME = fractol
-OBJECTS = src/main.o src/graphics.o src/compute.o src/mandelbrot.o src/julia.o src/onclick.o src/mlx.o src/newton.o
+OBJECTS = src/main.o src/graphics.o src/compute.o src/mandelbrot.o src/julia.o src/mlxextra.o src/mlx.o src/newton.o
 DEPS = -I./include -I $(LIBMLX)/include -I./lib/libft
 
 all: $(LIBMLX) space
@@ -18,6 +18,16 @@ $(NAME): $(OBJECTS) include/fractol.h
 	@echo
 
 $(LIBMLX):
+	@if [ ! -d /Users/$(USER)/.brew ]; then \
+		echo "\033[1;32mInstalling brew:\033[0m"; \
+		curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh; \
+		echo "\033[1;32mBrew installed\033[0m"; \
+	fi
+	@if [ ! -d /Users/$(USER)/.brew/opt/glfw ]; then \
+		echo "\033[1;32mInstalling glfw:\033[0m"; \
+		brew install glfw; \
+		echo "\033[1;32mglfw installed\033[0m"; \
+	fi
 	@if [ ! -d $(LIBMLX) ]; then \
 		echo "\033[1;32mMaking libmlx:\033[0m"; \
 		git clone https://github.com/Tanker50207/MLX42.git $(LIBMLX); \
@@ -37,7 +47,7 @@ libclean:
 	@rm -rf $(LIBMLX)
 	@echo "\033[1;31mMLX42 cleaned\033[0m"
 
-re: fclean space all
+re: clean space all
 
 space:
 	@echo
